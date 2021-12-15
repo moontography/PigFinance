@@ -17,7 +17,6 @@
    I will renounce the ownership to burn addresses to transfer #PIG to the community, make sure it's 100% safe.
 
    1,000,000,000,000,000 total supply
-   TODO: 5,000,000,000,000 tokens limitation for trade
 
    3% fee for liquidity will go to an address that the contract creates, 
    and the contract will sell it and add to liquidity automatically, 
