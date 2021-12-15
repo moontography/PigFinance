@@ -18,7 +18,6 @@
 
    1,000,000,000,000,000 total supply
    TODO: 5,000,000,000,000 tokens limitation for trade
-   TODO: 0.5% tokens for dev
 
    3% fee for liquidity will go to an address that the contract creates, 
    and the contract will sell it and add to liquidity automatically, 
@@ -42,7 +41,7 @@ contract PigToken is Context, IERC20, Ownable {
   using Address for address;
 
   address payable public marketingWallet =
-    payable(0x000000000000000000000000000000000000dEaD);
+    payable(0x2a5a481b1A90abD076e37037dAFC49A67cCb3B7f);
   address public constant deadAddress =
     0x000000000000000000000000000000000000dEaD;
 
@@ -77,7 +76,7 @@ contract PigToken is Context, IERC20, Ownable {
   uint256 public lpFee = 3;
   uint256 private _previousLpFee = lpFee;
 
-  uint256 public feeRate = 2;
+  uint256 public feeRate = 1;
   uint256 public launchTime;
 
   IUniswapV2Router02 public uniswapV2Router;
@@ -314,6 +313,11 @@ contract PigToken is Context, IERC20, Ownable {
     require(!_isSniper[_msgSender()], 'Stop sniping!');
 
     bool excludedFromFee = _isExcludedFee[from] || _isExcludedFee[to];
+
+    // buy
+    if (from == uniswapV2Pair && to != address(uniswapV2Router)) {
+      require(_tradingOpen, 'trading is not open yet');
+    }
 
     // sell
     if (!_inSwapAndLiquify && _tradingOpen && to == uniswapV2Pair) {
