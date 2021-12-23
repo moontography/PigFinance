@@ -5,7 +5,6 @@
 
     I make this #PIG to hand over it to the community.
     Create the community by yourself if you are interested.   
-    I suggest a telegram group name for you to create: https://t.me/PigTokenBSC
 
    Great features:
     1. 4% marketing - on every transfer we take out 4% of the trade, convert tokens to native (BNB) and deliver to marketing address
@@ -35,7 +34,7 @@ import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
 import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
 import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
 
-contract PigToken is Context, IERC20, Ownable {
+contract PigFinance is Context, IERC20, Ownable {
   using SafeMath for uint256;
   using Address for address;
 
@@ -54,7 +53,7 @@ contract PigToken is Context, IERC20, Ownable {
   mapping(address => bool) private _isExcludedReward;
   address[] private _excluded;
 
-  string private constant _name = 'PigToken';
+  string private constant _name = 'Pig Finance';
   string private constant _symbol = 'PIG';
   uint8 private constant _decimals = 9;
 
@@ -75,7 +74,7 @@ contract PigToken is Context, IERC20, Ownable {
   uint256 public lpFee = 3;
   uint256 private _previousLpFee = lpFee;
 
-  uint256 public feeRate = 1;
+  uint256 public feeRate = 2;
   uint256 public launchTime;
 
   IUniswapV2Router02 public uniswapV2Router;
@@ -347,7 +346,7 @@ contract PigToken is Context, IERC20, Ownable {
 
     // Leave half of LP tokens from total contract balance to be used to add liquidity to Uniswap
     uint256 ethSwapTokens = _contractTokenBalance
-      .mul(_liquidityFeeTotal.sub(lpFee.div(2)))
+      .mul(_liquidityFeeTotal.sub(lpFee))
       .div(_liquidityFeeTotal);
     uint256 lpTokens = _contractTokenBalance.sub(ethSwapTokens);
 
@@ -364,7 +363,7 @@ contract PigToken is Context, IERC20, Ownable {
     }
 
     // add to liquidity pool
-    uint256 lpETHBalance = ethBalanceUpdate.mul(lpFee).div(_liquidityFeeTotal);
+    uint256 lpETHBalance = ethBalanceUpdate.sub(marketingETHBalance);
     if (lpETHBalance > 0) {
       _addLp(lpTokens, lpETHBalance);
     }

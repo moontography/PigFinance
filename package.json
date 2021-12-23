@@ -1,7 +1,7 @@
 {
-  "name": "pig-token",
+  "name": "pig-finance",
   "version": "0.1.0",
-  "description": "PigToken contracts",
+  "description": "Pig Finance contracts",
   "main": "index.js",
   "scripts": {
     "prettier": "prettier --write 'contracts/**/*.sol'",

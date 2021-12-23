@@ -1,4 +1,4 @@
-# PigToken Contracts
+# Pig Finance Contracts
 
 ## Compile
 
@@ -11,7 +11,7 @@ $ npx hardhat compile
 If your contract requires extra constructor arguments, you'll have to specify them in [deploy options](https://hardhat.org/plugins/hardhat-deploy.html#deployments-deploy-name-options).
 
 ```sh
-$ CONTRACT_NAME=PigToken npx hardhat run --network rinkeby scripts/deploy.js
+$ CONTRACT_NAME=PigFinance npx hardhat run --network rinkeby scripts/deploy.js
 ```
 
 ## Verify
